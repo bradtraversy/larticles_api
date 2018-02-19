@@ -1,12 +1,18 @@
 # Larticles API
 
-> Laravel 5.5 API that uses the API resources
+> Laravel 5.5 API that uses the API resources. This is an API for an article CRUD app
 
 ## Quick Start
 
 ``` bash
+# Install Dependencies
+composer install
+
 # Run Migrations
 php artisan migrate
+
+# Import Articles
+php artisan db:seed
 ```
 
 ## Endpoints
