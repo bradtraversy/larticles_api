@@ -1,6 +1,6 @@
-# Larticles API
+# Larticles Vue/Laravel App
 
-> Laravel 5.5 API that uses the API resources. This is an API for an article CRUD app
+> Laravel 5.5 API that uses the API resources with a Vue.js frontend
 
 ## Quick Start
 
@@ -18,6 +18,12 @@ php artisan db:seed
 
 # If you get an error about an encryption key
 php artisan key:generate
+
+# Install JS dependencies
+npm install
+
+# Watch/compile 
+npm run watch
 ```
 
 ## Endpoints
