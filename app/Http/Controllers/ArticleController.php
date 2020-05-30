@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+
 use App\Article;
 use App\Http\Resources\Article as ArticleResource;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
         // Get articles
         $articles = Article::paginate(15);
@@ -23,12 +22,11 @@ class ArticleController extends Controller
         return ArticleResource::collection($articles);
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return ArticleResource|null
      */
     public function store(Request $request)
     {
@@ -38,19 +36,20 @@ class ArticleController extends Controller
         $article->title = $request->input('title');
         $article->body = $request->input('body');
 
-        if($article->save()) {
+        if ($article->save()) {
             return new ArticleResource($article);
         }
-        
+
+        return null;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return ArticleResource
      */
-    public function show($id)
+    public function show($id): ArticleResource
     {
         // Get article
         $article = Article::findOrFail($id);
@@ -62,16 +61,18 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return ArticleResource|null
      */
     public function destroy($id)
     {
         // Get article
         $article = Article::findOrFail($id);
 
-        if($article->delete()) {
+        if ($article->delete()) {
             return new ArticleResource($article);
-        }    
+        }
+
+        return null;
     }
 }
